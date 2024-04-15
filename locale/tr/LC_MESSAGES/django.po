@@ -1,0 +1,236 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-15 14:55+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: authy/managers.py:24 authy/managers.py:26
+msgid "The password must be set"
+msgstr "Şifre girilmesi zorunludur"
+
+#: authy/models.py:17
+msgid "active"
+msgstr "aktif"
+
+#: authy/models.py:20
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+"Kullanıcının aktif olup olmadığını belirtir. Kullanıcıları silmek yerine bu "
+"alanın seçimini kaldırın."
+
+#: authy/serializers.py:74 authy/serializers.py:183 authy/services.py:123
+#: contact_verification/serializers.py:26
+msgid "Email or phone should be provided"
+msgstr "E-posta ya da telefon numarası girilmelidir!"
+
+#: authy/serializers.py:85 authy/services.py:131
+#: contact_verification/serializers.py:37
+msgid "Enter email or phone not both"
+msgstr "E-Posta ve telefon beraber girilemez!"
+
+#: authy/serializers.py:101
+msgid "User with this email doesn't exist"
+msgstr "Bu e-postaya sahip kullanıcı bulunmamaktadır"
+
+#: authy/serializers.py:103
+msgid "User with this phone doesn't exist"
+msgstr "Bu telefon numarasına sahip kullanıcı bulunmamaktadır"
+
+#: authy/serializers.py:116
+msgid "Incorrect password"
+msgstr "Hatalı şifre"
+
+#: authy/serializers.py:147
+msgid "Invalid login credentials"
+msgstr "Hatalı giriş bilgileri"
+
+#: authy/serializers.py:191
+msgid "Passwords doesn't match"
+msgstr "Şifreler birbiriyle uyuşmuyor"
+
+#: authy/services.py:85
+msgid "email verification message"
+msgstr "MyApp için e-posta doğrulama kodunuz: {code}"
+
+#: authy/services.py:86
+msgid "Email Verification Code"
+msgstr "Email Doğrulama Kodu"
+
+#: authy/services.py:96
+msgid "phone verification message"
+msgstr "MyAp için telefon numarası doğrulama kodunuz: {code}"
+
+#: authy/views.py:48
+msgid "Logged in successfully."
+msgstr "Giriş başarılı."
+
+#: authy/views.py:82
+msgid "Registered successfully."
+msgstr "Kayıt başarılı."
+
+#: common/custom_exceptions/custom_exception.py:15
+#: common/custom_exceptions/custom_exception.py:17
+#: common/response/view_response.py:148
+msgid "A server error occurred."
+msgstr "Sunucu hatası oluştu."
+
+#: common/exception_handling/exception_handler_mapper.py:43
+#: common/exception_handling/exception_handler_mapper.py:79
+#: common/exception_handling/exception_handler_mapper.py:98
+#: common/exception_handling/exception_handler_mapper.py:104
+#: common/exception_handling/exception_handler_mapper.py:110
+#: common/exception_handling/exception_handler_mapper.py:116
+#: common/exception_handling/exception_handler_mapper.py:137
+#: common/exception_handling/exception_handler_mapper.py:155
+#: common/exception_handling/exception_handler_mapper.py:167
+#: common/exception_handling/exception_handler_mapper.py:173
+#: common/exception_handling/exception_handler_mapper.py:197
+#: common/response/view_response.py:107
+msgid "An error occured!"
+msgstr "Bir hata oluştu!"
+
+#: common/exception_handling/exception_handler_mapper.py:65
+msgid "Already exist!"
+msgstr "Oluşturmaya çalıştığın şey zaten var!"
+
+#: common/exception_handling/exception_handler_mapper.py:86
+#: common/exception_handling/exception_handler_mapper.py:161
+#: common/exception_handling/exception_handler_mapper.py:185
+#: user/services.py:26
+msgid "Content not found!"
+msgstr "İçeriğe ulaşılamadı!"
+
+#: common/exception_handling/exception_handler_mapper.py:92
+#: common/exception_handling/exception_handler_mapper.py:182
+#: common/exception_handling/exception_handler_mapper.py:188
+#: common/exception_handling/exception_handler_mapper.py:191
+#: user/serializers.py:78
+msgid "You don't have permission for this action!"
+msgstr "Bu işlem için izniniz yok!"
+
+#: common/exception_handling/exception_handler_mapper.py:122
+#: common/exception_handling/exception_handler_mapper.py:170
+#: common/response/view_response.py:130
+msgid "Request parameters are not valid!"
+msgstr "Gönderilen parametreler geçerli değil!"
+
+#: common/exception_handling/exception_handler_mapper.py:128
+msgid "Bad request!"
+msgstr "Hatalı istek!"
+
+#: common/exception_handling/exception_handler_mapper.py:131
+msgid "Request aborted!"
+msgstr "İstek yarıda kesildi!"
+
+#: common/exception_handling/exception_handler_mapper.py:143
+msgid "Upload is aborted!"
+msgstr "Yükleme işlemi yarıda kesildi!"
+
+#: common/exception_handling/exception_handler_mapper.py:149
+msgid "Session interrupted!"
+msgstr "Oturum kesintiye uğradı!"
+
+#: common/exception_handling/exception_handler_mapper.py:176
+msgid "Authentication failed!"
+msgstr "Kimlik doğrulama başarısız oldu!"
+
+#: common/exception_handling/exception_handler_mapper.py:179
+#: common/exception_handling/exception_handler_mapper.py:200
+msgid "Not authenticated!"
+msgstr "Giriş yapmalısınız!"
+
+#: common/exception_handling/exception_handler_mapper.py:194
+msgid "Unsupported media type!"
+msgstr "Desteklenmeyen dosya yapısı!"
+
+#: common/response/view_response.py:76 contact_verification/views.py:77
+#: contact_verification/views.py:108
+msgid "Success"
+msgstr "Başarılı"
+
+#: common/serializers.py:33 common/serializers.py:107
+msgid ""
+"The locale that refers to English language doesn't exist. Please create a "
+"locale with 'en' code first!"
+msgstr ""
+"İngilizce diline ait dil kaydı bulunamadı. Lütfen önce 'en' kodlu ingilizce "
+"dil kaydını oluşturun"
+
+#: common/serializers.py:42 common/serializers.py:116
+msgid "Root object locale id must be {} which refers to English language"
+msgstr "Ana kelime locale idsi {} (İngilizce) olmalı."
+
+#: common/serializers.py:79 common/serializers.py:155
+msgid ""
+"If this is the first time to create a translation it should be in English"
+msgstr "Bir kelimeyi sözlüğe eklemek için önce İngilizce'sini eklemelisiniz."
+
+#: common/services.py:28 common/services.py:99
+msgid "Root must be provided"
+msgstr "Ana kelime boş olamaz"
+
+#: common/views.py:137 common/views.py:206 common/views.py:295
+#: common/views.py:361 payment/views.py:182 user/views.py:185 user/views.py:288
+#: user/views.py:406
+msgid "Created successfully!"
+msgstr "Kayıt başarıyla oluşturuldu!"
+
+#: common/views.py:157 common/views.py:315 payment/views.py:202
+#: user/views.py:132 user/views.py:308 user/views.py:426
+msgid "Updated successfully!"
+msgstr "Güncelleme işlemi başarılı!"
+
+#: common/views.py:174 common/views.py:178 common/views.py:332
+#: common/views.py:336 payment/views.py:219 payment/views.py:223
+#: user/views.py:151 user/views.py:155 user/views.py:325 user/views.py:329
+#: user/views.py:443 user/views.py:447
+msgid "Deleted successfully!"
+msgstr "Silindi!"
+
+#: contact_verification/services.py:45
+msgid "Code is sent. Check your email."
+msgstr "Kod gönderilmiştir. E-Postanızı kontrol ediniz."
+
+#: contact_verification/services.py:47
+msgid "Code is sent. Check your messages."
+msgstr "Kod gönderilmiştir. Mesajlarınızı kontrol ediniz."
+
+#: contact_verification/services.py:66
+msgid "Code is invalid or expired"
+msgstr "Kod hatalı ya da süresi geçti"
+
+#: user/models.py:57
+msgid "Personal"
+msgstr "Kişisel"
+
+#: user/models.py:58
+msgid "Business"
+msgstr "Kurumsal"
+
+#: user/models.py:59
+msgid "Internal"
+msgstr "Dahili"
+
+#: user/models.py:218
+msgid "Public"
+msgstr "Genel"
+
+#: user/models.py:219
+msgid "Private"
+msgstr "Özel"
