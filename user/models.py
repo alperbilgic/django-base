@@ -12,47 +12,12 @@ from django_softdelete.models import SoftDeleteModel
 from phonenumber_field.modelfields import PhoneNumberField
 
 from authy.models import Account
+from common.models import Locale
 from subscription.models import UserSubscription
 from subscription.types import SubscriptionStatus
 from user.types import UserRole
 from utils.converters import ModelConverter
 from utils.fields import DateTimeWithoutTZField
-
-
-class Locale(models.Model):
-    name = models.CharField(max_length=150, blank=False, null=False, unique=True)
-    code = models.CharField(
-        max_length=16, blank=False, null=False, unique=True, default="tr"
-    )
-    created = DateTimeWithoutTZField(auto_now_add=True, editable=False, null=True)
-    updated = DateTimeWithoutTZField(auto_now=True, editable=False, null=True)
-
-    class Meta:
-        db_table = "locale"
-
-    @classmethod
-    def get_default(cls) -> "Locale":
-        locale, created = cls.objects.get_or_create(
-            name="Turkey",
-            code="tr",
-        )
-        return locale
-
-    @classmethod
-    def get_default_id(cls) -> "Locale":
-        locale, created = cls.objects.get_or_create(
-            name="Turkey",
-            code="tr",
-        )
-        return locale.id
-
-    @classmethod
-    def get_default_english(cls) -> "Locale":
-        locale, created = cls.objects.get_or_create(
-            name="England",
-            code="en",
-        )
-        return locale
 
 
 class User(SoftDeleteModel):

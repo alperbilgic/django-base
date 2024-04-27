@@ -7,7 +7,7 @@ from common.custom_exceptions.custom_exception import CustomException
 from common.models import Translation, TranslatedFile
 from common.response.response_information_codes.error_code import ErrorCode
 from common.types import FileType
-from user.models import Locale
+from common.models import Locale
 
 
 class TranslationBulkCreateItemSerializer(serializers.Serializer):
@@ -163,3 +163,9 @@ class TranslatedFileSerializer(serializers.ModelSerializer):
     def get_presigned_url(self, translated_file: TranslatedFile):
         if self.context["request"].method in ["POST", "PUT", "PATCH"]:
             return translated_file.get_upload_url(3600)
+
+
+class LocaleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Locale
+        fields = "__all__"

@@ -85,7 +85,7 @@ class SchoolViewSetTestCase(CustomIntegrationTestCase):
     def test_partial_update_school(self):
         school = School.objects.first()
         url = reverse("school-detail-viewset", kwargs={"id": school.id})
-        locale = baker.make("user.Locale", name="England", code="en")
+        locale = baker.make("common.Locale", name="England", code="en")
         new_name = self.create_translation(text="New school name", locale_id=locale.id)
         response = self.client.patch(
             url,

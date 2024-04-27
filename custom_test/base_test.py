@@ -9,7 +9,7 @@ from rest_framework.test import APITestCase
 
 from authy.models import Account
 from common.models import Translation
-from user.models import Locale
+from common.models import Locale
 from payment.models import Buyable
 from user.models import User
 from user.types import UserRole

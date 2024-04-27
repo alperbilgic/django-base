@@ -9,8 +9,8 @@ from rest_framework.viewsets import ModelViewSet
 from structlog import get_logger
 
 from common.custom_exceptions.custom_exception import CustomException
-from common.models import Translation, TranslatedFile
-from common.permissions.generic_permissions import EditorAndUp
+from common.models import Translation, TranslatedFile, Locale
+from common.permissions.generic_permissions import EditorAndUp, EditorAndUpOrReadOnly
 from common.response.response_information_codes.error_code import ErrorCode
 from common.response.response_information_codes.message_code import MessageCode
 from common.response.view_response import (
@@ -23,6 +23,7 @@ from common.serializers import (
     TranslatedFileSerializer,
     TranslationBulkCreateSerializer,
     TranslatedFileBulkCreateSerializer,
+    LocaleSerializer,
 )
 from common.services import TranslationService, TranslatedFileService
 from utils.converters import ValueConverter
@@ -364,6 +365,90 @@ class TranslatedFileViewSet(ModelViewSet):
             struct_logger=log,
             view_name=self.__class__.__name__,
             method_name="bulk_create",
+            request_body=request.data,
+            request_path=request.get_full_path(),
+            request_method=request.method,
+            view_response=view_response,
+        )
+        return view_response.rest_response
+
+
+class LocaleViewSet(ModelViewSet):
+    permission_classes = [EditorAndUpOrReadOnly]
+    serializer_class = LocaleSerializer
+    queryset = Locale.objects.all()
+    lookup_field = "id"
+
+    def retrieve(self, request, *args, **kwargs):
+        response = super().retrieve(request, *args, **kwargs)
+        view_response = ViewResponse(
+            response_body=response.data,
+            response_status=response.status_code,
+            is_successful=True,
+            response_information_code=MessageCode.RETRIEVE_CONTENT_SUCCESS,
+        )
+        return view_response.rest_response
+
+    def list(self, request, *args, **kwargs):
+        response = super().list(request, *args, **kwargs)
+        view_response = ViewResponse(
+            response_body=response.data,
+            response_status=response.status_code,
+            is_successful=True,
+            response_information_code=MessageCode.LIST_CONTENT_SUCCESS,
+        )
+        return view_response.rest_response
+
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+        view_response = ViewResponse(
+            response_body=response.data,
+            response_status=response.status_code,
+            is_successful=True,
+            response_information_code=MessageCode.CREATE_CONTENT_SUCCESS,
+            response_message=_("Created successfully!"),
+        )
+        log_view_response(
+            struct_logger=log,
+            view_name=self.__class__.__name__,
+            method_name="create",
+            request_body=request.data,
+            request_path=request.get_full_path(),
+            request_method=request.method,
+            view_response=view_response,
+        )
+        return view_response.rest_response
+
+    def partial_update(self, request, *args, **kwargs):
+        response = super().partial_update(request, *args, **kwargs)
+        view_response = ViewResponse(
+            response_body=response.data,
+            response_status=response.status_code,
+            is_successful=True,
+            response_information_code=MessageCode.LIST_CONTENT_SUCCESS,
+            response_message=_("Updated successfully!"),
+        )
+        log_view_response(
+            struct_logger=log,
+            view_name=self.__class__.__name__,
+            method_name="partial_update",
+            request_body=request.data,
+            request_path=request.get_full_path(),
+            request_method=request.method,
+            view_response=view_response,
+        )
+        return view_response.rest_response
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            super().destroy(request, *args, **kwargs)
+            view_response = ViewResponseNoContent(_("Deleted successfully!"))
+        except Http404:
+            view_response = ViewResponseNoContent(_("Deleted successfully!"))
+        log_view_response(
+            struct_logger=log,
+            view_name=self.__class__.__name__,
+            method_name="destroy",
             request_body=request.data,
             request_path=request.get_full_path(),
             request_method=request.method,

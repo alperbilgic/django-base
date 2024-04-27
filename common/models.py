@@ -15,9 +15,44 @@ from cloud_storage.get_cloud_storage_client import (
 )
 from cloud_storage.idrive_client import CloudRequest
 from common.types import FileType
-from user.models import Locale
 from utils.converters import ModelConverter
 from utils.fields import DateTimeWithoutTZField
+
+
+class Locale(models.Model):
+    name = models.CharField(max_length=150, blank=False, null=False, unique=True)
+    code = models.CharField(
+        max_length=16, blank=False, null=False, unique=True, default="tr"
+    )
+    created = DateTimeWithoutTZField(auto_now_add=True, editable=False, null=True)
+    updated = DateTimeWithoutTZField(auto_now=True, editable=False, null=True)
+
+    class Meta:
+        db_table = "locale"
+
+    @classmethod
+    def get_default(cls) -> "Locale":
+        locale, created = cls.objects.get_or_create(
+            name="Turkey",
+            code="tr",
+        )
+        return locale
+
+    @classmethod
+    def get_default_id(cls) -> "Locale":
+        locale, created = cls.objects.get_or_create(
+            name="Turkey",
+            code="tr",
+        )
+        return locale.id
+
+    @classmethod
+    def get_default_english(cls) -> "Locale":
+        locale, created = cls.objects.get_or_create(
+            name="England",
+            code="en",
+        )
+        return locale
 
 
 class TranslationManager(models.Manager):
@@ -35,7 +70,7 @@ class Translation(SoftDeleteModel):
         blank=True,
     )
     locale = models.ForeignKey(
-        "user.Locale",
+        Locale,
         on_delete=models.CASCADE,
         related_name="translations",
         default=Locale.get_default_id,
@@ -168,7 +203,7 @@ class TranslatedFile(SoftDeleteModel):
         blank=True,
     )
     locale = models.ForeignKey(
-        "user.Locale",
+        Locale,
         on_delete=models.CASCADE,
         related_name="translated_files",
         default=Locale.get_default_id,
