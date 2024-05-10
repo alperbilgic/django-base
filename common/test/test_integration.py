@@ -36,7 +36,7 @@ class LocaleViewTestCase(CustomIntegrationTestCase):
         )
 
     def test_create_locale(self):
-        data = {"name": "New locale", "code": "nl"}
+        data = {"name": "New locale", "code": "en"}
         locale_count = Locale.objects.count()
         url = reverse("locale-viewset")
         response = self.client.post(

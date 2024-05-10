@@ -7,6 +7,7 @@ from pytz.tzinfo import DstTzInfo, StaticTzInfo
 from rest_framework.request import Request
 from rest_framework.response import Response
 
+from common.types import LocaleCode
 from user.types import UserRole
 from utils.date import timezone_with_fallback
 
@@ -62,11 +63,11 @@ class GlobalContext:
         Else if user is logged in return user locale_code
         """
         language_code = (
-            self.request.META.get("HTTP_ACCEPT_LANGUAGE")
-            or self.request.GET.get("language", None)
-            or self.request.GET.get("locale_code", None)
+                self.request.META.get("HTTP_ACCEPT_LANGUAGE")
+                or self.request.GET.get("language", None)
+                or self.request.GET.get("locale_code", None)
         )
-        if language_code:
+        if language_code in [choice.value for choice in LocaleCode]:
             return language_code
 
         token_language_code = (
@@ -74,7 +75,7 @@ class GlobalContext:
             if self.request.auth and self.request.auth.payload
             else None
         )
-        return token_language_code or "tr"
+        return token_language_code or LocaleCode.EN.value
 
 
 class GlobalContextMiddleware:

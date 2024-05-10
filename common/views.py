@@ -116,19 +116,29 @@ class TranslationViewSet(ModelViewSet):
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
         )
 
+    def handle_locale_text_duplication(
+            self, request: Request, create_exception: Exception
+    ):
+        try:
+            return self.handle_duplicate_locale_text_index(request)
+        except:
+            raise create_exception
+
     def create(self, request, *args, **kwargs):
         try:
             response = super().create(request, *args, **kwargs)
-        except IntegrityError as e:
+        except Exception as create_exception:
             query_params = request.query_params.copy()
             return_existing_one = ValueConverter.str2bool(
                 query_params.get("return_existing_one", "False"), empty_is_true=True
             )
 
-            if "unique_locale_id_text_if_not_deleted" in str(e) and return_existing_one:
-                response = self.handle_duplicate_locale_text_index(request)
+            if return_existing_one:
+                response = self.handle_locale_text_duplication(
+                    request, create_exception
+                )
             else:
-                raise e
+                raise create_exception
 
         view_response = ViewResponse(
             response_body=response.data,

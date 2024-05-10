@@ -14,7 +14,7 @@ from cloud_storage.get_cloud_storage_client import (
     get_cloud_storage_vendor,
 )
 from cloud_storage.idrive_client import CloudRequest
-from common.types import FileType
+from common.types import FileType, LocaleCode
 from utils.converters import ModelConverter
 from utils.fields import DateTimeWithoutTZField
 
@@ -22,7 +22,12 @@ from utils.fields import DateTimeWithoutTZField
 class Locale(models.Model):
     name = models.CharField(max_length=150, blank=False, null=False, unique=True)
     code = models.CharField(
-        max_length=16, blank=False, null=False, unique=True, default="tr"
+        max_length=16,
+        choices=LocaleCode.choices,
+        blank=False,
+        null=False,
+        unique=True,
+        default=LocaleCode.EN.value,
     )
     created = DateTimeWithoutTZField(auto_now_add=True, editable=False, null=True)
     updated = DateTimeWithoutTZField(auto_now=True, editable=False, null=True)
@@ -105,7 +110,7 @@ class Translation(SoftDeleteModel):
 
     @transaction.atomic
     def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
+            self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         is_create = not bool(self.id)
         super().save(force_insert, force_update, using, update_fields)
@@ -116,15 +121,15 @@ class Translation(SoftDeleteModel):
     def get_text_by_locale_code_or_default(self, locale_code: str) -> str:
         original_translation = self.root
         translation = (
-            original_translation.translations.filter(locale__code=locale_code).first()
-            or original_translation.translations.filter(locale__code="en").first()
-            or original_translation.translations.first()
+                original_translation.translations.filter(locale__code=locale_code).first()
+                or original_translation.translations.filter(locale__code="en").first()
+                or original_translation.translations.first()
         )
         return translation.text if translation else ""
 
     @staticmethod
     def get_list_of_texts_from_id_list(
-        translation_ids: List, locale_code: str
+            translation_ids: List, locale_code: str
     ) -> Dict[int, str]:
         """
         Returns translated texts of given inputs
@@ -222,7 +227,7 @@ class TranslatedFile(SoftDeleteModel):
             ),
             models.CheckConstraint(
                 check=Q(name__isnull=True) & ~Q(root_id=F("id"))
-                | (Q(name__isnull=False) & Q(root_id=F("id"))),
+                      | (Q(name__isnull=False) & Q(root_id=F("id"))),
                 name="translated_file_not_null_name_if_root",
             ),
         ]
@@ -238,7 +243,7 @@ class TranslatedFile(SoftDeleteModel):
 
     @transaction.atomic
     def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
+            self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         is_create = not bool(self.id)
         super().save(force_insert, force_update, using, update_fields)
@@ -283,7 +288,7 @@ class TranslatedFile(SoftDeleteModel):
 
     @staticmethod
     def get_list_of_urls_from_id_list(
-        translation_ids: List, locale_code: str
+            translation_ids: List, locale_code: str
     ) -> Dict[int, str]:
         """
         Returns translated texts of given inputs
