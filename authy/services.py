@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import update_last_login
 from django.db import transaction
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from rest_framework import status
 
 from authy.helpers.token_helper import (

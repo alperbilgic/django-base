@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import update_last_login
 from django.core.exceptions import ObjectDoesNotExist
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from phonenumber_field.serializerfields import PhoneNumberField
 from rest_framework import serializers, status
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
